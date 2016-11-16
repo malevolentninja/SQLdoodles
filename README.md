@@ -16,4 +16,4 @@ Create a simple playlist for me to see a selection of songs.
 
 
 
-More project ideas to comes
+More project ideas to come later.
