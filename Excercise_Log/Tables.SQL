@@ -27,7 +27,27 @@ SELECT type, AVG(calories) AS avg_calories FROM exercise_logs
     ; 
     
 SELECT type FROM exercise_logs GROUP BY type HAVING COUNT(*) >= 2;
+SELECT COUNT(*) FROM exercise_logs
+WHERE heart_rate > 220 - 22;
 
+/* target heart rate 50-90% of max */
+SELECT COUNT(*) FROM exercise_logs WHERE
+    heart_rate >= ROUND(0.50 * (220-22)) 
+    AND  heart_rate <= ROUND(0.90 * (220 - 22));
+
+/* CASE */
+SELECT COUNT(*),
+    CASE 
+        WHEN heart_rate > 220-30 THEN "above max"
+        WHEN heart_rate > ROUND(0.90 * (220-30)) THEN "above target"
+        WHEN heart_rate > ROUND(0.50 * (220-30)) THEN "within target"
+        ELSE "below target"
+       END as "hr_zone"
+  FROM excercise_logs
+  GROUP BY hr_zone
+        
+        
+        
 CREATE TABLE physio_recommend
     (id INTEGER PRIMARY KEY,
     type TEXT,
